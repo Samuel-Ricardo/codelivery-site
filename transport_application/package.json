@@ -17,6 +17,7 @@
     "@types/node": "18.15.11",
     "@types/react": "18.0.33",
     "@types/react-dom": "18.0.11",
+    "@types/socket.io-client": "^3.0.0",
     "eslint": "8.37.0",
     "eslint-config-next": "13.2.4",
     "google-maps": "^4.3.3",
