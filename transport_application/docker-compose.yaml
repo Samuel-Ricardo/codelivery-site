@@ -8,4 +8,4 @@ services:
     ports:
       - 3001:3000
     volumes:
-      - .:home/node/app
+      - .:/home/node/app
