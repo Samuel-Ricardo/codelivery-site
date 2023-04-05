@@ -12,4 +12,10 @@ export class Map {
   moveCurrentMarker(id: string, position: google.maps.LatLngLiteral) {
     this.routes[id].currentMaker.setPosition(position)
   }
+
+  removeRoute(id: string) {
+    const route = this.routes[id];
+    route.delete();
+    delete this.routes[id];
+  }
 }
