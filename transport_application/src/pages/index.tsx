@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import styles from '@/styles/Home.module.css'
 import { CssBaseline, ThemeProvider } from '@mui/material'
 import { SnackbarProvider } from 'notistack'
 import theme from '@themes/global'
