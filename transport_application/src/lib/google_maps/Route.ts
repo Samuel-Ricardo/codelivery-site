@@ -26,5 +26,31 @@ export class Route {
       }
     })
     this.directionRenderer.setMap(this.currentMaker.getMap() as google.maps.Map);
+  
+    
   }
+
+  private calculateRoute() {
+    
+    const currentPosition = this.currentMaker.getPosition() as google.maps.LatLng;
+
+    const endPosition = this.endMaker.getPosition() as google.maps.LatLng;
+  
+    new google.maps.DirectionsService().route(
+      {
+        origin: currentPosition,
+        destination: endPosition,
+        travelMode: google.maps.TravelMode.DRIVING,
+      },
+
+      (result, status) => { 
+        if (status === "OK") {
+          this.directionRenderer.setDirections(result);
+          return;
+        }
+        throw new Error(status);
+      }
+    );
+  }
+
 }
