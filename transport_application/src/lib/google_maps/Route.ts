@@ -57,5 +57,4 @@ export class Route {
     this.endMarker.setMap(null);
     this.directionsRenderer.setMap(null);
   }
-
 }
