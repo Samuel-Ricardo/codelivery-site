@@ -1,5 +1,8 @@
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
+import { CssBaseline, ThemeProvider } from '@mui/material'
+import { SnackbarProvider } from 'notistack'
+import theme from '@themes/global'
 
 export default function Home() {
   return (
@@ -10,7 +13,13 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
+      <main>
+        <ThemeProvider theme={theme} >
+          <SnackbarProvider maxSnack={2}>
+            <CssBaseline />
+            <p>Hello Wolrd :D</p>
+          </SnackbarProvider>
+        </ThemeProvider>
       </main>
     </>
   )
