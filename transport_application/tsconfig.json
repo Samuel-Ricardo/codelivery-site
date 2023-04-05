@@ -21,7 +21,8 @@
       "@types": ["./src/@types/index.ts"],
       "@themes/*": ["./src/styles/theme/*"],
       "@Components": ["./src/components/index.ts"],
-      "@Component/*": ["./src/components/*"]
+      "@Component/*": ["./src/components/*"],
+      "@Styles/*": ["./src/styles/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
