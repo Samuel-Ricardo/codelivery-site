@@ -19,6 +19,23 @@ import { GOOGLE_API_KEY } from "@/config/env";
 
 export const Mapping = _ => {
 
+  console.log({ TOMI: GOOGLE_API_KEY })
+
+  //const  googleMapsLoader = new Loader(process.env.NEXT_PUBLIC_REACT_APP_GOOGLE_API_KEY)
+
+  const API_URL = process.env.NEXT_PUBLIC_REACT_APP_API_URL as string;
+  const { NEW_POSITION, NEW_DIRECTION } = EVENTS;
+
+  const style = mapping_style();
+
+  const [routes, setRoutes] = useState<Route[]>([]);
+  const [routeIdSelected, setRouteIdSelected] = useState("");
+  const mapRef = useRef<Map>();
+
+  const socketIORef = useRef<Socket>();
+
+  const { enqueueSnackbar } = useSnackbar();
+
   
 
   return (
