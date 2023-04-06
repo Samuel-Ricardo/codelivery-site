@@ -36,7 +36,15 @@ export const Mapping = _ => {
 
   const { enqueueSnackbar } = useSnackbar();
 
-  
+  const finishRoute = useCallback(
+    (route: Route) => {
+
+      enqueueSnackbar(`${route.title} Finalized!`, { variant: 'success' })
+      mapRef.current?.removeRoute(route._id)
+
+    }, [enqueueSnackbar]
+  )
+
 
   return (
     <Grid className={style.root} container>
