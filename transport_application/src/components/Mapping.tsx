@@ -90,7 +90,41 @@ export const Mapping = _ => {
 
   }, []);
 
-  
+  const startRoute = useCallback((event: FormEvent) => {
+    event.preventDefault();
+
+    const route = routes.find(({ _id }) => _id === routeIdSelected)
+    const color = sample(shuffle(route_colors)) as string // get random color
+
+    try {
+
+      mapRef.current?.addRoute(
+        routeIdSelected,
+        {
+          currentMarkerOptions: {
+            position: route?.startPosition,
+            icon: makeCarIcon(color),
+          },
+          endMarkerOptions: {
+            position: route?.endPosition,
+            icon: makeMarkerIcon(color),
+          }
+        }
+      )
+
+      socketIORef.current?.emit(NEW_DIRECTION, { routeId: routeIdSelected })
+
+    } catch (error) {
+
+      return error instanceof RouteAlredyExistsError ?
+
+        enqueueSnackbar(`${route?.title} Alredy exists, wait for the trip to finish`, { variant: 'error' })
+
+        : console.error(error);
+
+    }
+  }, [routeIdSelected, routes, enqueueSnackbar]
+  )
 
   return (
     <Grid className={style.root} container>
