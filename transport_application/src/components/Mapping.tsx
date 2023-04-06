@@ -45,6 +45,29 @@ export const Mapping = _ => {
     }, [enqueueSnackbar]
   )
 
+  useEffect(() => {
+
+    if (!socketIORef.current?.connected) {
+      socketIORef.current = connect(API_URL)
+      socketIORef.current.on("connect", () => console.log("Connected! :D"))
+    }
+
+    const handler = (data: RouteResponse) => {
+      console.log({ data })
+
+      mapRef.current?.moveCurrentMarker(data.routeId, { lat: data.position[0], lng: data.position[1] })
+
+      const route = routes.find(route => route._id === data.routeId)
+
+      if (route && data.finished) finishRoute(route);
+    }
+
+    socketIORef.current?.on(NEW_POSITION, handler)
+
+    return () => socketIORef.current?.off(NEW_POSITION, handler);
+
+  }, [finishRoute, routes, routeIdSelected])
+
 
   return (
     <Grid className={style.root} container>
