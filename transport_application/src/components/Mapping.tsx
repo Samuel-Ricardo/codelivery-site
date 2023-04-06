@@ -68,6 +68,12 @@ export const Mapping = _ => {
 
   }, [finishRoute, routes, routeIdSelected])
 
+  useEffect(() => {
+    fetch(`${API_URL}/routes`)
+      .then(data => data.json())
+      .then(data => setRoutes(data))
+  }, [])
+
 
   return (
     <Grid className={style.root} container>
