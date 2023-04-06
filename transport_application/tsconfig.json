@@ -22,7 +22,9 @@
       "@themes/*": ["./src/styles/theme/*"],
       "@Components": ["./src/components/index.ts"],
       "@Component/*": ["./src/components/*"],
-      "@Styles/*": ["./src/styles/*"]
+      "@Styles/*": ["./src/styles/*"],
+      "@Configs": ["./src/config/index.ts"],
+      "@Config/*":["./src/config/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
