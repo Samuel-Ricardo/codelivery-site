@@ -74,6 +74,23 @@ export const Mapping = _ => {
       .then(data => setRoutes(data))
   }, [])
 
+  useEffect(() => {
+
+    (async () => {
+
+      const [, position] = await Promise.all([
+        //googleMapsLoader.load(),
+        getCurrentPosition({ enableHighAccuracy: true })
+      ])
+
+      const divMap = document.getElementById("map")
+      mapRef.current = new Map(divMap, { zoom: 15, center: position })
+
+    })()
+
+  }, []);
+
+  
 
   return (
     <Grid className={style.root} container>
