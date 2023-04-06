@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { CssBaseline, ThemeProvider } from '@mui/material'
 import { SnackbarProvider } from 'notistack'
 import theme from '@themes/global'
+import { Mapping } from '@/components'
 
 export default function Home() {
   return (
@@ -16,7 +17,7 @@ export default function Home() {
         <ThemeProvider theme={theme} >
           <SnackbarProvider maxSnack={2}>
             <CssBaseline />
-            <p>Hello Wolrd :D</p>
+            <Mapping/>
           </SnackbarProvider>
         </ThemeProvider>
       </main>
