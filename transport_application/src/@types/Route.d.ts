@@ -1,6 +1,6 @@
 import { Position } from "@types";
 
-export interface Route {
+export interface IRouteResponse {
   _id: string;
   title: string;
   startPosition: Positionn;
