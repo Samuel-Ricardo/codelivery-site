@@ -61,6 +61,10 @@ export const MapView = () => {
     setShouldStart(true)  
   },[])
  
+  const syncRoutes = async () => setRoutes(await getALL())
+  useEffect(() => {syncRoutes()}, [])
+
+
 
 
   return (
