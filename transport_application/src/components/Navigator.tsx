@@ -39,7 +39,26 @@ export const Navigator = (props:INavigatorProps) => {
   const syncInitialPosition = async () => setInitialPosition(await getCurrentPosition({enableHighAccuracy:true}));  
  
 
-  
+  const addRoute = () => {
+    if(selectedRouteId in travels) throw new RouteAlredyExistsError();
+
+    travels[selectedRouteId] = new Route({
+      currentMakerOptions: {
+        position: selectedRoute?.startPosition,
+        icon: makeCarIcon(color)
+      },
+      endMarkerOptions: {
+      position: selectedRoute?.endPosition,
+       icon: makeMarkerIcon(color)
+     }
+    })
+
+    setTravels(travels)
+
+    getConnection().emit(EVENTS.NEW_DIRECTION, {routeId: selectedRouteId})
+    start.set(false)
+  }
+
   return (
     <Grid item xs={12} sm={9}>
         <GoogleMap 
