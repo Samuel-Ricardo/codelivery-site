@@ -1,4 +1,4 @@
-import { google } from "google-maps";
+import { google } from "googlemaps";
 
 export class Route {
   public currentMaker: google.maps.Marker;
