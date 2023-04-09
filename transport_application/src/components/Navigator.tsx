@@ -36,9 +36,9 @@ export const Navigator = (props:INavigatorProps) => {
   const [travels, setTravels] = useState<{[id:string]:Route}>({})
 
   const [initialPosition, setInitialPosition] = useState<Position>({lng:0, lat:0})
-
+  const syncInitialPosition = async () => setInitialPosition(await getCurrentPosition({enableHighAccuracy:true}));  
  
-  
+
   
   return (
     <Grid item xs={12} sm={9}>
