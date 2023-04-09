@@ -31,6 +31,14 @@ export const Navigator = (props:INavigatorProps) => {
     start
   } = props;
   
+  const color = getRandomColor()
+
+  const [travels, setTravels] = useState<{[id:string]:Route}>({})
+
+  const [initialPosition, setInitialPosition] = useState<Position>({lng:0, lat:0})
+
+ 
+  
   
   return (
     <Grid item xs={12} sm={9}>
