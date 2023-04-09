@@ -20,22 +20,18 @@ export const MapView = () => {
 
   const [routes, setRoutes] = useState<IRouteResponse[]>([])
   const [routeIdSelected, setRouteIdSelected] = useState("")
-
-  const [travels, setTraves] = useState<{[id:string]: IRouteResponse}>({})
   const [shouldStart,setShouldStart] = useState(false)
-
-  const map = useRef<Map>();
   
   const { enqueueSnackbar } = useSnackbar()
 
   const Socket = getConnection();
-  const { NEW_POSITION, NEW_DIRECTION } = EVENTS;
+  const { NEW_POSITION } = EVENTS;
 
 
   const finishRoute = useCallback((route: IRouteResponse) => {
  
-    enqueueSnackbar(`${route.title} Finalized`, { variant: 'success' })
-    map.current?.removeRoute(route._id)
+  enqueueSnackbar(`${route.title} Finalized`, { variant: 'success' })
+    // map.current?.removeRoute(route._id)
   
   }, [enqueueSnackbar])
 
@@ -45,7 +41,7 @@ export const MapView = () => {
     const handler = (data: RouteResponse) => {
       console.log({ data });
 
-      map.current?.moveCurrentMarker(data.routeId, { lat: data.position[0], lng: data.position[1] })
+      // map.current?.moveCurrentMarker(data.routeId, { lat: data.position[0], lng: data.position[1] })
       const route = routes.find(({ _id }) => _id === data.routeId)
 
       if (route && data.finished) finishRoute(route)
