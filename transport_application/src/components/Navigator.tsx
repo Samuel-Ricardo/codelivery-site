@@ -72,8 +72,17 @@ export const Navigator = (props:INavigatorProps) => {
   
   }, [selectedRouteId, isLoaded, start.should])
 
-  
-  
+  useEffect(() => {
+    if(selectedRoute){
+      setInitialPosition(selectedRoute?.startPosition)
+      startTravel()
+      return;
+    }
+
+    syncInitialPosition()
+  }, [isLoaded, selectedRoute, start.should])
+
+
   return (
     <Grid item xs={12} sm={9}>
         <GoogleMap 
