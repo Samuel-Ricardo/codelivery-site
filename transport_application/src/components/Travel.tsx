@@ -8,7 +8,21 @@ interface ITravelProps {
 
 export const Travel = ({travel}:ITravelProps) => {
 
+  const [travelState, setTravelState] = useState<google.maps.DirectionsResult>()
 
+  useEffect(() => {
+    new google.maps.DirectionsService().route(
+      {
+        origin: travel.currentMaker.getPosition() as google.maps.LatLng,
+        destination: travel.endMarker.getPosition() as google.maps.LatLng,
+        travelMode: google.maps.TravelMode.DRIVING,
+      }, 
+      (result, status) => {
+       if(status === "OK") return setTravelState(result!)
+       throw new Error(status)
+      }
+    )
+  },[])
 
   return (
    <DirectionsRenderer
