@@ -64,7 +64,7 @@ export const MapView = () => {
   const syncRoutes = async () => setRoutes(await getALL())
   useEffect(() => {syncRoutes()}, [])
 
-
+  if (!isLoaded) return <div>Loading...</div>
 
 
   return (
