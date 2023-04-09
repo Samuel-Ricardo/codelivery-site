@@ -59,6 +59,21 @@ export const Navigator = (props:INavigatorProps) => {
     start.set(false)
   }
 
+  
+  const startTravel = useCallback(() => {
+   
+    try{ if (start.should) addRoute() }
+    
+    catch(error) {
+      return error instanceof RouteAlredyExistsError ?
+        enqueueSnackbar(`${selectedRoute?.title} Alredy exists, wait for the trip to finish`, { variant: 'error' })
+        : console.error(error)
+    }
+  
+  }, [selectedRouteId, isLoaded, start.should])
+
+  
+  
   return (
     <Grid item xs={12} sm={9}>
         <GoogleMap 
