@@ -32,7 +32,14 @@ export const MapView = () => {
   const { NEW_POSITION, NEW_DIRECTION } = EVENTS;
 
 
+  const finishRoute = useCallback((route: IRouteResponse) => {
+ 
+    enqueueSnackbar(`${route.title} Finalized`, { variant: 'success' })
+    map.current?.removeRoute(route._id)
   
+  }, [enqueueSnackbar])
+
+
   return (
     <Grid className={style.root} container>
       <Grid item xs={12} sm={3}>
