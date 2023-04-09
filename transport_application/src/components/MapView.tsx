@@ -14,7 +14,25 @@ import {Navigator} from './Navigator'
 
 export const MapView = () => {
 
- 
+  const { isLoaded } = useLoadScript({ googleMapsApiKey: GOOGLE_API_KEY() });
+
+  const style = mapping_style()
+
+  const [routes, setRoutes] = useState<IRouteResponse[]>([])
+  const [routeIdSelected, setRouteIdSelected] = useState("")
+
+  const [travels, setTraves] = useState<{[id:string]: IRouteResponse}>({})
+  const [shouldStart,setShouldStart] = useState(false)
+
+  const map = useRef<Map>();
+  
+  const { enqueueSnackbar } = useSnackbar()
+
+  const Socket = getConnection();
+  const { NEW_POSITION, NEW_DIRECTION } = EVENTS;
+
+
+  
   return (
     <Grid className={style.root} container>
       <Grid item xs={12} sm={3}>
