@@ -82,7 +82,13 @@ export const Navigator = (props:INavigatorProps) => {
     syncInitialPosition()
   }, [isLoaded, selectedRoute, start.should])
 
-
+console.log({
+    props,
+    travels,
+    isLoaded,
+    initialPosition,
+  })
+  
   return (
     <Grid item xs={12} sm={9}>
         <GoogleMap 
