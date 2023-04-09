@@ -40,6 +40,29 @@ export const MapView = () => {
   }, [enqueueSnackbar])
 
 
+  useEffect(() => {
+
+    const handler = (data: RouteResponse) => {
+      console.log({ data });
+
+      map.current?.moveCurrentMarker(data.routeId, { lat: data.position[0], lng: data.position[1] })
+      const route = routes.find(({ _id }) => _id === data.routeId)
+
+      if (route && data.finished) finishRoute(route)
+    }
+
+    Socket.on(NEW_POSITION, handler)
+
+  }, [finishRoute, routes, routeIdSelected])
+
+  
+  const startRoute = useCallback((event: FormEvent) => {
+    event.preventDefault();
+    setShouldStart(true)  
+  },[])
+ 
+
+
   return (
     <Grid className={style.root} container>
       <Grid item xs={12} sm={3}>
