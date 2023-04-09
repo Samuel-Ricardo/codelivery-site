@@ -7,8 +7,8 @@ export function getCurrentPosition (options?:PositionOptions): Promise<Position>
     navigator.geolocation.getCurrentPosition(
       
       position => resolve ({
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude,
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
       }),
 
       error => reject(error),
