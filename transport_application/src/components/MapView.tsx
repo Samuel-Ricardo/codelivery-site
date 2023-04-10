@@ -1,8 +1,8 @@
-import { EVENTS, GOOGLE_API_KEY } from "@/config"
+import { GOOGLE_API_KEY } from "@/config"
 import { mapping_style } from "@/styles/mapping_style"
-import { GoogleMap, MarkerF, useLoadScript } from "@react-google-maps/api"
-import { FormEvent, useCallback, useEffect, useMemo, useRef, useState } from "react"
-import { RouteResponse, IRouteResponse, Position } from "@/@types"
+import { useLoadScript } from "@react-google-maps/api"
+import { FormEvent, useCallback, useEffect, useRef, useState } from "react"
+import { IRouteResponse } from "@types"
 import { useSnackbar } from "notistack"
 import { getConnection } from "@/api/connection"
 import { getALL } from "@/api/routes"
@@ -39,7 +39,6 @@ export const MapView = () => {
   useEffect(() => {syncRoutes()}, [])
 
   if (!isLoaded) return <div>Loading...</div>
-
 
   return (
     <Grid className={style.root} container>
