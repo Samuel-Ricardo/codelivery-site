@@ -8,7 +8,7 @@ const socket_client:Socket = connect(API_URL());
   socket_client.on('connect', () => console.log("Connected! :D"))
 
   socket_client.onAnyOutgoing((event, ...args) => console.log({event, args}))
-  socket_client.onAny((event, ...args) => console.log({event, args}))
+  //socket_client.onAny((event, ...args) => console.log({event, args}))
 
   socket_client.on('disconnect', (...args) => console.log("Client disconnected", {args}))
 
