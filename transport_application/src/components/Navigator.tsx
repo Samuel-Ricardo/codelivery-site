@@ -2,14 +2,13 @@ import { Position, IRouteResponse } from "@types"
 import {getRandomColor} from '@/util/index'
 import { getCurrentPosition } from "@/lib/google_maps/geolocation"
 import { Grid } from "@mui/material"
-import { DirectionsRenderer, GoogleMap, MarkerF } from "@react-google-maps/api"
+import { GoogleMap, MarkerF } from "@react-google-maps/api"
 import { Route } from "@/lib/google_maps/Route"
-import { FormEvent, MutableRefObject, useCallback, useEffect, useState } from "react"
+import { MutableRefObject, useCallback, useEffect, useState } from "react"
 import { RouteAlredyExistsError } from "@/errors"
 import { makeCarIcon, makeMarkerIcon } from "@/lib/google_maps/Vehicle"
 import { enqueueSnackbar } from "notistack"
 import { Travel } from "./Travel"
-import { getConnection } from "@/api/connection"
 import { EVENTS } from "@/config"
 import { Socket } from "socket.io-client"
 
@@ -87,10 +86,9 @@ export const Navigator = (props:INavigatorProps) => {
     syncInitialPosition()
   }, [isLoaded, selectedRoute, start])
 
-console.log({
+  console.log({
     props,
     travels,
-    isLoaded,
     initialPosition,
   })
  
@@ -114,14 +112,10 @@ console.log({
     
     finishRouteMessage(Number(id))
 
-    console.log({travelsRemove: travels})
     travels[id].delete();  
     delete travels[id];
-    console.log({travelsRemoved: travels})
     setTravels(travels)
   }
-
-  useEffect(() => console.log({travels}),[travels])
 
   return (
     <Grid item xs={12} sm={9}>
