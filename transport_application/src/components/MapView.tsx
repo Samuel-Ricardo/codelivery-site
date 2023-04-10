@@ -2,12 +2,10 @@ import { EVENTS, GOOGLE_API_KEY } from "@/config"
 import { mapping_style } from "@/styles/mapping_style"
 import { GoogleMap, MarkerF, useLoadScript } from "@react-google-maps/api"
 import { FormEvent, useCallback, useEffect, useMemo, useRef, useState } from "react"
-import { Map } from '@/lib/google_maps/Map'
 import { RouteResponse, IRouteResponse, Position } from "@/@types"
 import { useSnackbar } from "notistack"
 import { getConnection } from "@/api/connection"
 import { getALL } from "@/api/routes"
-import { getCurrentPosition } from "@/lib/google_maps/geolocation"
 import { Button, Grid, MenuItem, Select } from "@mui/material"
 import { Navbar } from "./Navbar"
 import {Navigator} from './Navigator'
@@ -24,34 +22,14 @@ export const MapView = () => {
   
   const { enqueueSnackbar } = useSnackbar()
 
-  const Socket = getConnection();
-  const { NEW_POSITION } = EVENTS;
+  const socket = useRef(getConnection());
 
+  const finishRouteMessage = useCallback((id: number) => {
 
-  const finishRoute = useCallback((route: IRouteResponse) => {
- 
-  enqueueSnackbar(`${route.title} Finalized`, { variant: 'success' })
-    // map.current?.removeRoute(route._id)
+    enqueueSnackbar(`${routes[id].title} Finalized`, { variant: 'success' })  
   
-  }, [enqueueSnackbar])
+  }, [enqueueSnackbar, routes])
 
-
-  useEffect(() => {
-
-    const handler = (data: RouteResponse) => {
-      console.log({ data });
-
-      // map.current?.moveCurrentMarker(data.routeId, { lat: data.position[0], lng: data.position[1] })
-      const route = routes.find(({ _id }) => _id === data.routeId)
-
-      if (route && data.finished) finishRoute(route)
-    }
-
-    Socket.on(NEW_POSITION, handler)
-
-  }, [finishRoute, routes, routeIdSelected])
-
-  
   const startRoute = useCallback((event: FormEvent) => {
     event.preventDefault();
     setShouldStart(true)  
@@ -100,9 +78,11 @@ export const MapView = () => {
 
       <Navigator
         isLoaded={isLoaded}
+        socket={socket} 
         selectedRouteId={routeIdSelected}
         selectedRoute={routes.find(({_id}) => _id === routeIdSelected)}
-          start={{should: shouldStart, set: setShouldStart}}
+        start={{should: shouldStart, set: setShouldStart}}
+        finishRouteMessage={finishRouteMessage}
       />
 
     </Grid>

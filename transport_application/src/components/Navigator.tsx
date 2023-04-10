@@ -4,18 +4,21 @@ import { getCurrentPosition } from "@/lib/google_maps/geolocation"
 import { Grid } from "@mui/material"
 import { DirectionsRenderer, GoogleMap, MarkerF } from "@react-google-maps/api"
 import { Route } from "@/lib/google_maps/Route"
-import { FormEvent, useCallback, useEffect, useState } from "react"
+import { FormEvent, MutableRefObject, useCallback, useEffect, useState } from "react"
 import { RouteAlredyExistsError } from "@/errors"
 import { makeCarIcon, makeMarkerIcon } from "@/lib/google_maps/Vehicle"
 import { enqueueSnackbar } from "notistack"
 import { Travel } from "./Travel"
 import { getConnection } from "@/api/connection"
 import { EVENTS } from "@/config"
+import { Socket } from "socket.io-client"
 
 interface INavigatorProps {
   isLoaded: boolean;
+  socket: MutableRefObject<Socket>;
   selectedRouteId: string;
   selectedRoute?: IRouteResponse;
+  finishRouteMessage: (id:number) => void;
   start: {
     should: boolean;
     set: Function;
@@ -25,22 +28,24 @@ interface INavigatorProps {
 export const Navigator = (props:INavigatorProps) => {
 
   const {
-    isLoaded, 
+    isLoaded,
+    socket,
     selectedRouteId, 
     selectedRoute,
-    start
+    start,
+    finishRouteMessage,
   } = props;
-  
-  const color = getRandomColor()
 
   const [travels, setTravels] = useState<{[id:string]:Route}>({})
 
   const [initialPosition, setInitialPosition] = useState<Position>({lng:0, lat:0})
   const syncInitialPosition = async () => setInitialPosition(await getCurrentPosition({enableHighAccuracy:true}));  
- 
+
 
   const addRoute = () => {
     if(selectedRouteId in travels) throw new RouteAlredyExistsError();
+
+    const color = getRandomColor()
 
     travels[selectedRouteId] = new Route({
       currentMakerOptions: {
@@ -48,21 +53,21 @@ export const Navigator = (props:INavigatorProps) => {
         icon: makeCarIcon(color)
       },
       endMarkerOptions: {
-      position: selectedRoute?.endPosition,
-       icon: makeMarkerIcon(color)
-     }
+        position: selectedRoute?.endPosition,
+        icon: makeMarkerIcon(color)
+      }
     })
 
     setTravels(travels)
 
-    getConnection().emit(EVENTS.NEW_DIRECTION, {routeId: selectedRouteId})
+    socket.current.emit(EVENTS.NEW_DIRECTION, {routeId: selectedRouteId})
     start.set(false)
   }
 
   
   const startTravel = useCallback(() => {
    
-    try{ if (start.should) addRoute() }
+    try{ addRoute() }
     
     catch(error) {
       return error instanceof RouteAlredyExistsError ?
@@ -70,17 +75,17 @@ export const Navigator = (props:INavigatorProps) => {
         : console.error(error)
     }
   
-  }, [selectedRouteId, isLoaded, start.should])
+  }, [selectedRouteId, isLoaded])
 
   useEffect(() => {
     if(selectedRoute){
       setInitialPosition(selectedRoute?.startPosition)
-      startTravel()
+      if (start.should) startTravel()
       return;
     }
 
     syncInitialPosition()
-  }, [isLoaded, selectedRoute, start.should])
+  }, [isLoaded, selectedRoute, start])
 
 console.log({
     props,
@@ -88,7 +93,36 @@ console.log({
     isLoaded,
     initialPosition,
   })
-  
+ 
+  const updateTravel = (id:string,value:Route) => {
+    travels[id] = value
+    setTravels(travels)   
+  }
+
+  const removeTravel = (travelId:string) => {
+    const newTravels:{[id:string]:Route} = {};  
+    Object
+      .keys(travels)
+      .forEach((id) => {
+        if(id !== travelId) newTravels[id] = travels[id]
+      })
+    console.log({newTravels})
+    setTravels(newTravels)
+  }
+
+  const finishTravel = (id:string) => {
+    
+    finishRouteMessage(Number(id))
+
+    console.log({travelsRemove: travels})
+    travels[id].delete();  
+    delete travels[id];
+    console.log({travelsRemoved: travels})
+    setTravels(travels)
+  }
+
+  useEffect(() => console.log({travels}),[travels])
+
   return (
     <Grid item xs={12} sm={9}>
         <GoogleMap 
@@ -97,12 +131,20 @@ console.log({
          mapContainerStyle={
            { width: window.innerWidth, height: window.innerHeight }
         }>  
-      
+    
+        <MarkerF position={initialPosition}/>
+
           {
             travels?
               Object.keys(travels).map( id => (
-                <Travel
-                 travel={travels[id]} 
+                <Travel 
+                  key={id}
+                  id={id}
+                  travel={travels[id]} 
+                  socket={socket}
+                  updateTravel={updateTravel}
+                  removeTravel={removeTravel}
+                  finishTravel={finishTravel}
                 />
               ))
             : <></>
