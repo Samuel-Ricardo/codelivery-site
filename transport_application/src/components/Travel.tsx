@@ -6,18 +6,20 @@ import { EVENTS } from "@/config"
 import { Socket } from "socket.io-client"
 
 interface ITravelProps {
-  id:          string;
+  id:           string;
   travel:       Route;
   socket:       MutableRefObject<Socket>
   updateTravel: (id:string, value:Route) => void 
   removeTravel: (id:string) => void
   finishTravel: (id:string) => void
+  setAction:    (state: {action: "remove", travel: string}) => any
 }
 
 export const Travel = ({
   id, 
   travel, 
   socket,
+  setAction,
   updateTravel,
   finishTravel,
 }:ITravelProps) => {
@@ -33,7 +35,6 @@ export const Travel = ({
         travelMode: google.maps.TravelMode.DRIVING,
       }, 
       (result, status) => {
-        console.log({result, status})
        if(status === "OK") return setTravelState(result!)
        throw new Error(status)
       }
@@ -41,19 +42,24 @@ export const Travel = ({
   }
 
   const syncTravelState = (data: RouteResponse) => {
-    console.log({data})
+    //console.log({data})
+
+    if(data.routeId !== id) return;
 
     travel.currentMaker.setPosition({
       lat: data.position[0],
       lng: data.position[1]
     })
 
-    updateTravel(id, travel)
+    //updateTravel(id, travel)
     setRouteState({...travel} as Route)
+    
 
     if (data.finished) {
-      finishTravel(id)
       socket.current.off(EVENTS.NEW_POSITION, syncTravelState)
+      console.log({id,travel, routeState, data})
+      //finishTravel(id)
+      setAction({action: "remove", travel: id})
     }
   }
 
@@ -62,7 +68,7 @@ export const Travel = ({
     socket.current.on(EVENTS.NEW_POSITION, syncTravelState)
   },[])
 
-  useEffect(() => console.log({CHANGE_TRASVEL: travel}),[travel])
+  useEffect(() => console.log(""),[])
 
   return (<>
 
