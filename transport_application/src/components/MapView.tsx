@@ -24,16 +24,14 @@ export const MapView = () => {
 
   const socket = useRef(getConnection());
 
-  const finishRouteMessage = useCallback((id: number) => {
-
-    enqueueSnackbar(`${routes[id].title} Finalized`, { variant: 'success' })  
-  
-  }, [enqueueSnackbar, routes])
-
   const startRoute = useCallback((event: FormEvent) => {
     event.preventDefault();
     setShouldStart(true)  
   },[])
+  const finishRouteMessage = useCallback(
+    (id: number) => enqueueSnackbar(`${routes[id-1].title} Finalized`, { variant: 'success' }),
+    [routes,enqueueSnackbar]
+  )  
  
   const syncRoutes = async () => setRoutes(await getALL())
   useEffect(() => {syncRoutes()}, [])
