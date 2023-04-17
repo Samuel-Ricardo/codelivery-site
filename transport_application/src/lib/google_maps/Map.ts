@@ -1,8 +1,8 @@
-import { google } from "google-maps";
 import { Route } from "./Route";
 import { RouteAlredyExistsError } from "@/errors";
 
 export class Map {
+
   public map: google.maps.Map;
   private routes: {[id: string]: Route} = {};
 
