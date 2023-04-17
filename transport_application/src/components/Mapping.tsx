@@ -1,5 +1,5 @@
 import { mapping_style } from "@/styles/mapping_style"
-import { Route } from "@types";
+import { IRouteResponse } from "@types";
 import { Map } from '@/lib/google_maps/Map'
 import { useSnackbar } from "notistack";
 import { useCallback, useRef, useState, useEffect, FormEvent } from "react";
@@ -15,6 +15,7 @@ import { RouteAlredyExistsError } from "@/errors";
 import { Button, Grid, MenuItem, Select } from "@mui/material";
 import { Navbar } from "./Navbar";
 import { GOOGLE_API_KEY } from "@/config/env";
+import { useLoadScript } from "@react-google-maps/api";
 
 
 export const Mapping = _ => {
@@ -23,12 +24,14 @@ export const Mapping = _ => {
 
   //const  googleMapsLoader = new Loader(process.env.NEXT_PUBLIC_REACT_APP_GOOGLE_API_KEY)
 
+    const { isLoaded } = useLoadScript({ googleMapsApiKey: GOOGLE_API_KEY() });
+
   const API_URL = process.env.NEXT_PUBLIC_REACT_APP_API_URL as string;
   const { NEW_POSITION, NEW_DIRECTION } = EVENTS;
 
   const style = mapping_style();
 
-  const [routes, setRoutes] = useState<Route[]>([]);
+  const [routes, setRoutes] = useState<IRouteResponse[]>([]);
   const [routeIdSelected, setRouteIdSelected] = useState("");
   const mapRef = useRef<Map>();
 
@@ -37,7 +40,7 @@ export const Mapping = _ => {
   const { enqueueSnackbar } = useSnackbar();
 
   const finishRoute = useCallback(
-    (route: Route) => {
+    (route: IRouteResponse) => {
 
       enqueueSnackbar(`${route.title} Finalized!`, { variant: 'success' })
       mapRef.current?.removeRoute(route._id)
@@ -78,7 +81,7 @@ export const Mapping = _ => {
 
     (async () => {
 
-      const [, position] = await Promise.all([
+      const [position] = await Promise.all([
         //googleMapsLoader.load(),
         getCurrentPosition({ enableHighAccuracy: true })
       ])
@@ -88,7 +91,7 @@ export const Mapping = _ => {
 
     })()
 
-  }, []);
+  }, [isLoaded]);
 
   const startRoute = useCallback((event: FormEvent) => {
     event.preventDefault();
