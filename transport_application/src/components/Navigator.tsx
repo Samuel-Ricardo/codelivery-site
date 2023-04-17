@@ -36,6 +36,7 @@ export const Navigator = (props:INavigatorProps) => {
   } = props;
 
   const [travels, setTravels] = useState<{[id:string]:Route}>({})
+  const [action, setAction] = useState<{action: "remove", travel: string}>()
 
   const [initialPosition, setInitialPosition] = useState<Position>({lng:0, lat:0})
   const syncInitialPosition = async () => setInitialPosition(await getCurrentPosition({enableHighAccuracy:true}));  
@@ -60,11 +61,10 @@ export const Navigator = (props:INavigatorProps) => {
     setTravels(travels)
 
     socket.current.emit(EVENTS.NEW_DIRECTION, {routeId: selectedRouteId})
-    start.set(false)
   }
 
   
-  const startTravel = useCallback(() => {
+  const startTravel = () => {
    
     try{ addRoute() }
     
@@ -73,8 +73,10 @@ export const Navigator = (props:INavigatorProps) => {
         enqueueSnackbar(`${selectedRoute?.title} Alredy exists, wait for the trip to finish`, { variant: 'error' })
         : console.error(error)
     }
+
+    finally{start.set(false)}
   
-  }, [selectedRouteId, isLoaded])
+  }
 
   useEffect(() => {
     if(selectedRoute){
@@ -84,13 +86,13 @@ export const Navigator = (props:INavigatorProps) => {
     }
 
     syncInitialPosition()
-  }, [isLoaded, selectedRoute, start])
+  }, [travels, isLoaded, selectedRoute, start])
 
-  console.log({
-    props,
-    travels,
-    initialPosition,
-  })
+  // console.log({
+  //   props,
+  //   travels,
+  //   initialPosition,
+  // })
  
   const updateTravel = (id:string,value:Route) => {
     travels[id] = value
@@ -98,24 +100,33 @@ export const Navigator = (props:INavigatorProps) => {
   }
 
   const removeTravel = (travelId:string) => {
+    console.log({travelId,TRAVEL_FINISHSSSS:travels});
     const newTravels:{[id:string]:Route} = {};  
+
     Object
       .keys(travels)
       .forEach((id) => {
         if(id !== travelId) newTravels[id] = travels[id]
       })
+
     console.log({newTravels})
     setTravels(newTravels)
   }
 
   const finishTravel = (id:string) => {
-    
     finishRouteMessage(Number(id))
 
     travels[id].delete();  
-    delete travels[id];
-    setTravels(travels)
+    removeTravel(id);
   }
+
+  useEffect(() => {
+    console.log({travels})
+  } , [travels])
+
+  useEffect(() => {
+    if(action?.action === "remove") finishTravel(action.travel) 
+  },[action] )
 
   return (
     <Grid item xs={12} sm={9}>
@@ -136,6 +147,7 @@ export const Navigator = (props:INavigatorProps) => {
                   id={id}
                   travel={travels[id]} 
                   socket={socket}
+                  setAction = {setAction}
                   updateTravel={updateTravel}
                   removeTravel={removeTravel}
                   finishTravel={finishTravel}
