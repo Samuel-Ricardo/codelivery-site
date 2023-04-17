@@ -47,8 +47,8 @@ export const Travel = ({
     if(data.routeId !== id) return;
 
     travel.currentMaker.setPosition({
-      lat: data.position[0],
-      lng: data.position[1]
+      lat: data.position[1],
+      lng: data.position[0]
     })
 
     //updateTravel(id, travel)
@@ -67,8 +67,6 @@ export const Travel = ({
     init()  
     socket.current.on(EVENTS.NEW_POSITION, syncTravelState)
   },[])
-
-  useEffect(() => console.log(""),[])
 
   return (<>
 
