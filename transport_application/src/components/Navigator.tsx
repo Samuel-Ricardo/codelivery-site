@@ -134,7 +134,7 @@ export const Navigator = (props:INavigatorProps) => {
          zoom={10} 
          center={initialPosition} 
          mapContainerStyle={
-           { width: window.innerWidth, height: window.innerHeight }
+           { width: (window.innerWidth/4)*3, height: window.innerHeight }
         }>  
     
         <MarkerF position={initialPosition}/>
