@@ -38,7 +38,7 @@
 <img src="https://github.com/Samuel-Ricardo/travel_simulator/raw/main/readme_files/techs.png"/> 
 
 <p align="justify">
-    This is a NextJS Site that monitoring and trigger travels. You can switch between the different types of travels and follow theys by a colored route and Icons that represent the car and the destiny.
+    This is the real time transportation application Codelivery, powered by NextJS that monitoring and trigger travels. You can switch between the different types of travels and follow theys by a colored route and Icons that represent the car and the destiny.
 </p>
 
 <p align="justify">
@@ -62,4 +62,33 @@
 
 <br>
 
-real-time_transportation_application
+<h2 id="techs">
+  :building_construction: | Technologies and Concepts Studied:
+</h2>
+
+> <a href='https://nextjs.org/'> <img width="64px" src="https://pbs.twimg.com/card_img/1669374288581853186/RoVDMNTV?format=jpg&name=4096x4096" /> </a>
+
+- NextJS
+- Websockets
+- SocketIO
+- MaterialUI
+- Typescript
+- Google Cloud Platform
+- Google Maps 
+- Kafka
+- Docker
+- Mullti Thread and Concurrency
+- Perfomance
+- Event Driven Architeture
+- Scalability
+- Real Time
+
+> Among Others...
+
+<br>
+
+#
+
+<h2 id="app">
+  💻 | Application:
+</h2>
