@@ -66,7 +66,7 @@
   :building_construction: | Technologies and Concepts Studied:
 </h2>
 
-> <a href='https://nextjs.org/'> <img width="64px" src="https://pbs.twimg.com/card_img/1669374288581853186/RoVDMNTV?format=jpg&name=4096x4096" /> </a>
+> <a href='https://nextjs.org/'> <img width="128px" src="https://pbs.twimg.com/card_img/1669374288581853186/RoVDMNTV?format=jpg&name=4096x4096" /> </a>
 
 - NextJS
 - Websockets
@@ -92,3 +92,35 @@
 <h2 id="app">
   💻 | Application:
 </h2>
+
+
+<img src="https://github.com/Samuel-Ricardo/travel_simulator/raw/main/readme_files/scheme.png" />
+
+- Front-End     : NextJS   | [ [repositories](https://github.com/Samuel-Ricardo/codelivery-site)  ] 
+- Back-End      : NestJS   | [ [repositories](https://github.com/Samuel-Ricardo/codelivery_api)  ]
+- microsservice : GO Lang  | [ [repositories](https://github.com/Samuel-Ricardo/travel_simulator/tree/main)  ]
+- Devops        : Kafka | Elastic  - [ [repositories](https://github.com/Samuel-Ricardo/travel_simulator/tree/main)  ]
+
+<br>
+
+<p align="justify">
+  In Resume this project have a Microsservice responsible to start and manage a travel returning the travel data in real time by streams, kafka recive this data and garant that all comunications between applications work together without data loses and with scalable Perfomance of Kafka platform.
+</p>
+
+<p>
+    The Back-End send by kafka a event to microsservice that trigger a start of a route, after that, the route data like position and if is it finished are send to kafka, the back end listen the event by kafka and get data to handle it and send to front end, that render all date with the travel route and real time position, cleaning it when finished.
+</p>
+
+<p align="justify">
+    All data is tracked and stored in Elastic Search with kafka intermediator that provide by your platform the Kibana that create amazing views to handle with Data Analytics building beautiful graphics for example.
+</p>
+
+<br>
+
+- This application is hosted on [Vercel]("https://codelivery-site-git-main-samuel-ricardo.vercel.app/")
+- This application infrastructure is hosted on Google Cloud Platform with Kubernetes - [GCP]
+- Kafka runs with Confluent
+
+<br>
+
+
