@@ -25,6 +25,41 @@
 
 #
 
+<br>
 
+<p id="project"/>
+
+<h2>  | :artificial_satellite: About:  </h2>
+
+<p align="justify">
+  This project is a application of a complete Full Cycle project, with amazing technologies like NextJS for front-end, NestJS for back-end, PostgreSQL database, GO Lang for microsservice, Docker & Kubernetes for devops, metrics with Elastic Search & Kibana, Message / Event Driven Architeture with Kafka and more.
+</p>
+
+<img src="https://github.com/Samuel-Ricardo/travel_simulator/raw/main/readme_files/techs.png"/> 
+
+<p align="justify">
+    This is a NextJS Site that monitoring and trigger travels. You can switch between the different types of travels and follow theys by a colored route and Icons that represent the car and the destiny.
+</p>
+
+<p align="justify">
+   For all this was used very powerful technologies and platforms, with a complete ecosystem of microsservice, back-end, elastic platform, kafka, kubernetes, GCP all this conected and comunicating in real time with websockets and data stream sustained by the resilience of Kafka on Confluent.
+</p>
+
+> <a href="https://samuel-ricardo.github.io/"> <img src="https://github.com/Samuel-Ricardo/travel_simulator/raw/main/readme_files/app_preview.png"> </a>
+
+  <br>
+  
+- This APP is hosted on [ [Vercel]("https://codelivery-site-git-main-samuel-ricardo.vercel.app/") ]
+- Current Version: <b> 1.0.0 </b>
+
+<br/>
+
+- Front-End     : NextJS   | [ [repositories](https://github.com/Samuel-Ricardo/codelivery-site)  ] 
+- Back-End      : NestJS   | [ [repositories](https://github.com/Samuel-Ricardo/codelivery_api)  ]
+- microsservice : GO Lang  | [ [repositories](https://github.com/Samuel-Ricardo/travel_simulator/tree/main)  ]
+
+#
+
+<br>
 
 real-time_transportation_application
