@@ -32,7 +32,7 @@
 <h2>  | :artificial_satellite: About:  </h2>
 
 <p align="justify">
-  This project is a application of a complete Full Cycle project, with amazing technologies like NextJS for front-end, NestJS for back-end, PostgreSQL database, GO Lang for microsservice, Docker & Kubernetes for devops, metrics with Elastic Search & Kibana, Message / Event Driven Architeture with Kafka and more.
+  This project is a application of a complete Full Cycle project, with amazing technologies like NextJS for front-end, NestJS for back-end, MongoDB database, GO Lang for microsservice, Docker & Kubernetes for devops, metrics with Elastic Search & Kibana, Message / Event Driven Architeture with Kafka and more.
 </p>
 
 <img src="https://github.com/Samuel-Ricardo/travel_simulator/raw/main/readme_files/techs.png"/> 
@@ -108,11 +108,11 @@
 </p>
 
 <p>
-    The Back-End send by kafka a event to microsservice that trigger a start of a route, after that, the route data like position and if is it finished are send to kafka, the back end listen the event by kafka and get data to handle it and send to front end, that render all date with the travel route and real time position, cleaning it when finished.
+    The Back-End send by kafka a event to microsservice that trigger a start of a route, after that, the route data like position and if is it finished are send to kafka, the back end listen the event by kafka and get data to handle it and send to front end, that render all data with the travel route and real time position, cleaning it when finished.
 </p>
 
 <p align="justify">
-    All data is tracked and stored in Elastic Search with kafka intermediator that provide by your platform the Kibana that create amazing views to handle with Data Analytics building beautiful graphics for example.
+    All data is tracked and stored in Elastic Search (with kafka as intermediator) that provide by your platform the Kibana that create amazing views to handle with Data Analytics building beautiful graphics for example.
 </p>
 
 <p align = "justify" >
@@ -127,21 +127,23 @@
 
 <br>
 
+ <b> Click on any images to open the video demo! </b>
+
 #
 
-<img src="./readme_files/image.png"/>
+> <a target="_blank" href="./readme_files/Codelivery Demo.mp4"> <img src="./readme_files/image.png"/> </a>
 
 | Application have preventions like, you cant start the same race twice if it i'snt finished
 
-<img src="./readme_files/image2.png"/>
+> <a target="_blank" href="./readme_files/Codelivery Demo.mp4"> <img src="./readme_files/image2.png"/> </a>
 
 | You have all features of google maps like choice satellite view, see locations arround, highlight the relief, and use street view.
 
-<img src="./readme_files/image3.png"/>
+> <a target="_blank" href="./readme_files/Codelivery Demo.mp4"> <img src="./readme_files/image3.png"/> </a>
 
-| In this mode, you can see the car running in real time following it on the map while it is moving
+| In this mode, you can see the car running and follow it on the map while it is moving in real time!
 
-<img src="./readme_files/image4.png"/>
+> <a target="_blank" href="./readme_files/Codelivery Demo.mp4"> <img src="./readme_files/image4.png"/> </a>
 
 | You can follow the car at the destiny
 
@@ -197,6 +199,8 @@ Navigate to project folder ` $ cd ./transport_application/ ` and run it using ` 
   See more: ./transport_application/docker-compose.yaml
 
 ```
+
+<br>
 
 <h2> 
    👨‍💻 | How to run the full project
