@@ -115,11 +115,35 @@
     All data is tracked and stored in Elastic Search with kafka intermediator that provide by your platform the Kibana that create amazing views to handle with Data Analytics building beautiful graphics for example.
 </p>
 
+<p align = "justify" >
+ You can start multiples races that are updated in real time visualizing the results of all this on the map, even if something falls the infra can handle with it.  
+</p>
+
 <br>
 
 - This application is hosted on [Vercel]("https://codelivery-site-git-main-samuel-ricardo.vercel.app/")
 - This application infrastructure is hosted on Google Cloud Platform with Kubernetes - [GCP]
 - Kafka runs with Confluent
+
+<br>
+
+#
+
+<img src="./readme_files/image.png"/>
+
+| Application have preventions like, you cant start the same race twice if it i'snt finished
+
+<img src="./readme_files/image2.png"/>
+
+| You have all features of google maps like choice satellite view, see locations arround, highlight the relief, and use street view.
+
+<img src="./readme_files/image3.png"/>
+
+| In this mode, you can see the car running in real time following it on the map while it is moving
+
+<img src="./readme_files/image4.png"/>
+
+| You can follow the car at the destiny
 
 <br>
 
@@ -173,6 +197,19 @@ Navigate to project folder ` $ cd ./transport_application/ ` and run it using ` 
   See more: ./transport_application/docker-compose.yaml
 
 ```
+
+<h2> 
+   👨‍💻 | How to run the full project
+</h2>
+
+First, you need to setup the Kafka platform with the Travel Microsservice, click on image bellow to setup it
+> <a target="_blank" href="https://github.com/Samuel-Ricardo/travel_simulator#------how-to-use"> <img src="https://cdn.thenewstack.io/media/2022/05/57bb2a1f-golang.png"/> </a>
+
+Now, you need to setup the NestJS API, click on image bellow to setup it
+> <a target="_blank" href="https://github.com/Samuel-Ricardo/codelivery_api#------how-to-use"> <img src="https://cdn.thenewstack.io/media/2022/05/57bb2a1f-golang.png"/> </a>
+
+Now, you can setup this NextJS App, click on image bellow to setup it
+> <a target="_blank" href="https://github.com/Samuel-Ricardo/codelivery-site#run-project"> <img src="https://cdn.thenewstack.io/media/2022/05/57bb2a1f-golang.png"/> </a>
 
 #
 
