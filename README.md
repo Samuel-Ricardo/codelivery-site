@@ -203,13 +203,13 @@ Navigate to project folder ` $ cd ./transport_application/ ` and run it using ` 
 </h2>
 
 First, you need to setup the Kafka platform with the Travel Microsservice, click on image bellow to setup it
-> <a target="_blank" href="https://github.com/Samuel-Ricardo/travel_simulator#------how-to-use"> <img src="https://cdn.thenewstack.io/media/2022/05/57bb2a1f-golang.png"/> </a>
+> <a target="_blank" href="https://github.com/Samuel-Ricardo/travel_simulator#------how-to-use"> <img width="128px" src="https://cdn.thenewstack.io/media/2022/05/57bb2a1f-golang.png"/> </a>
 
 Now, you need to setup the NestJS API, click on image bellow to setup it
-> <a target="_blank" href="https://github.com/Samuel-Ricardo/codelivery_api#------how-to-use"> <img src="https://cdn.thenewstack.io/media/2022/05/57bb2a1f-golang.png"/> </a>
+> <a target="_blank" href="https://github.com/Samuel-Ricardo/codelivery_api#------how-to-use"> <img width="128px" src="https://imgs.search.brave.com/hM_dWTDZ7a9nUL-Xf70pL9QQeiO6v0_q0rHk8NQlNSU/rs:fit:200:200:1/g:ce/aHR0cHM6Ly9uZXN0/anMuY29tL2ltZy9u/ZXN0LW9nLnBuZw"/> </a>
 
 Now, you can setup this NextJS App, click on image bellow to setup it
-> <a target="_blank" href="https://github.com/Samuel-Ricardo/codelivery-site#run-project"> <img src="https://cdn.thenewstack.io/media/2022/05/57bb2a1f-golang.png"/> </a>
+> <a target="_blank" href="https://github.com/Samuel-Ricardo/codelivery-site#run-project"> <img width="128px" src="https://pbs.twimg.com/card_img/1669374288581853186/RoVDMNTV?format=jpg&name=4096x4096"/> </a>
 
 #
 
